@@ -1,5 +1,5 @@
 {
-  "name": "javascript-project-starter",
+  "name": "weather-app",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kristenmazza/javascript-project-starter.git"
+    "url": "git+https://github.com/kristenmazza/weather-app.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kristenmazza/javascript-project-starter/issues"
+    "url": "https://github.com/kristenmazza/weather-app/issues"
   },
-  "homepage": "https://github.com/kristenmazza/javascript-project-starter#readme",
+  "homepage": "https://github.com/kristenmazza/weather-app#readme",
   "devDependencies": {
     "css-loader": "^6.7.3",
     "eslint": "^8.36.0",
@@ -33,7 +33,7 @@
     "style-loader": "^3.3.2",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.1"
+    "webpack-dev-server": "^4.15.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
