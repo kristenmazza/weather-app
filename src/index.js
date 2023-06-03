@@ -21,7 +21,7 @@ async function getWeatherData(name) {
   displayLoading();
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=623e5f2a87014dff886202016231405&q=${name}&aqi=no`,
+      `https://api.weatherapi.com/v1/forecast.json?key=623e5f2a87014dff886202016231405&q=${name}&aqi=no`,
       { mode: "cors" }
     );
 
