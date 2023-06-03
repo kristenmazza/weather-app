@@ -1,3 +1,5 @@
+import format from "date-fns/format";
+
 function componentContainer() {
   const container = document.createElement("div");
   container.classList.add("container");
@@ -69,27 +71,22 @@ function componentLocationInformation() {
   return locationInformation;
 }
 
-function componentLocationHeader(name, date, time) {
+function componentLocationHeader(name, date) {
   const locationContainer = document.createElement("div");
   const locationName = document.createElement("h2");
   const timeInfo = document.createElement("div");
   const locationDate = document.createElement("span");
-  const divider = document.createElement("span");
-  const locationTime = document.createElement("span");
 
+  locationContainer.classList.add("location-container");
   locationName.classList.add("location-name");
   timeInfo.classList.add("time-info");
 
   locationName.textContent = name;
-  divider.textContent = " | ";
   locationDate.textContent = date;
-  locationTime.textContent = time;
 
   locationContainer.appendChild(locationName);
   locationContainer.appendChild(timeInfo);
   timeInfo.appendChild(locationDate);
-  timeInfo.appendChild(divider);
-  timeInfo.appendChild(locationTime);
 
   return locationContainer;
 }
@@ -171,14 +168,42 @@ function componentDetailedDisplay(wind, humidity, rain) {
   return detailedConditionsContainer;
 }
 
-export default function init() {
+export function displayWeatherInfo(location) {
+  const locationInformation = document.querySelector(".location-information");
+  const weatherContainer = componentWeatherContainer();
+
+  locationInformation.appendChild(
+    componentLocationHeader(
+      location.locationName,
+      format(new Date(location.localTime), "eeee, MMMM dd, yyyy  |  p")
+    )
+  );
+
+  locationInformation.appendChild(weatherContainer);
+  weatherContainer.appendChild(
+    componentBasicTempDisplay(
+      location.conditionIcon,
+      `${location.temp}°F`,
+      location.condition,
+      `${location.feelsLike}°F`
+    )
+  );
+  weatherContainer.appendChild(
+    componentDetailedDisplay(
+      `${location.windMph} mph`,
+      `${location.humidity}%`,
+      `${location.rain}%`
+    )
+  );
+}
+
+export function init() {
   const container = componentContainer();
   const header = componentHeader();
   const title = componentTitle();
   const searchForm = componentSearchForm();
   const conversionToggle = componentConversionToggle();
   const locationInformation = componentLocationInformation();
-  const weatherContainer = componentWeatherContainer();
 
   document.body.appendChild(container);
   container.appendChild(header);
@@ -186,17 +211,4 @@ export default function init() {
   header.appendChild(searchForm);
   header.appendChild(conversionToggle);
   container.appendChild(locationInformation);
-  locationInformation.appendChild(
-    componentLocationHeader("City, Country", "date", "time")
-  );
-  locationInformation.appendChild(weatherContainer);
-  weatherContainer.appendChild(
-    componentBasicTempDisplay(
-      "//cdn.weatherapi.com/weather/64x64/day/116.png",
-      "34F",
-      "Partly Cloudy",
-      "33F"
-    )
-  );
-  weatherContainer.appendChild(componentDetailedDisplay("24mph", "5%", "0%"));
 }

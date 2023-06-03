@@ -1,7 +1,7 @@
 export default class Location {
   constructor(
     locationName,
-    locationCountry,
+    localTime,
     tempF,
     feelsLikeF,
     condition,
@@ -11,7 +11,7 @@ export default class Location {
     rain
   ) {
     this.locationName = locationName;
-    this.locationCountry = locationCountry;
+    this.localTime = localTime;
     this.temp = tempF;
     this.feelsLike = feelsLikeF;
     this.condition = condition;

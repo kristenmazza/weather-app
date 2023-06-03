@@ -120,6 +120,12 @@ input[type="radio"].toggle+label:hover {
   gap: 1em;
 }
 
+.location-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .location-name {
   font-size: 3rem;
   font-weight: 500;

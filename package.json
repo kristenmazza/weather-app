@@ -37,5 +37,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
   }
 }

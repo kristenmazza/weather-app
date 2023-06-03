@@ -1,6 +1,8 @@
 import "./style.css";
 import Location from "./location";
-import init from "./dom";
+import { init, displayWeatherInfo } from "./dom";
+
+init();
 
 async function getWeatherData(name) {
   const response = await fetch(
@@ -9,8 +11,8 @@ async function getWeatherData(name) {
   );
 
   const weatherData = await response.json();
-  const locationName = weatherData.location.name;
-  const locationCountry = weatherData.location.country;
+  const locationName = `${weatherData.location.name}, ${weatherData.location.country}`;
+  const localTime = weatherData.location.localtime;
   const tempF = weatherData.current.temp_f;
   const feelsLikeF = weatherData.current.feelslike_f;
   const condition = weatherData.current.condition.text;
@@ -21,7 +23,7 @@ async function getWeatherData(name) {
 
   const location = new Location(
     locationName,
-    locationCountry,
+    localTime,
     tempF,
     feelsLikeF,
     condition,
@@ -31,9 +33,7 @@ async function getWeatherData(name) {
     rain
   );
 
-  console.log(location);
+  displayWeatherInfo(location);
 }
 
 getWeatherData("seoul");
-
-init();
