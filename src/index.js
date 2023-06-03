@@ -20,6 +20,8 @@ async function getWeatherData(name) {
   clearWeatherInfo();
   displayLoading();
   try {
+    // This API key is publicly available.
+    // API key included here per instructions from The Odin Project.
     const response = await fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=623e5f2a87014dff886202016231405&q=${name}&aqi=no`,
       { mode: "cors" }
