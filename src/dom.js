@@ -19,17 +19,25 @@ function componentTitle() {
 }
 
 function componentSearchForm() {
+  const searchFormContainer = document.createElement("div");
   const searchForm = document.createElement("form");
   const searchInput = document.createElement("input");
   const searchButton = document.createElement("button");
+  const spanError = document.createElement("span");
+  searchFormContainer.classList.add("search-form-container");
+  searchForm.setAttribute("id", "form");
   searchForm.classList.add("search-form");
   searchInput.setAttribute("type", "search");
   searchInput.classList.add("search-input");
   searchInput.setAttribute("placeholder", "Search location...");
   searchButton.setAttribute("type", "submit");
+  spanError.classList.add("error");
+  spanError.setAttribute("aria-live", "polite");
+  searchFormContainer.appendChild(searchForm);
   searchForm.appendChild(searchInput);
   searchForm.appendChild(searchButton);
-  return searchForm;
+  searchFormContainer.appendChild(spanError);
+  return searchFormContainer;
 }
 
 function componentConversionToggle() {
@@ -168,9 +176,31 @@ function componentDetailedDisplay(wind, humidity, rain) {
   return detailedConditionsContainer;
 }
 
+export function clearWeatherInfo() {
+  const locationInformation = document.querySelector(".location-information");
+
+  while (locationInformation.firstChild) {
+    locationInformation.removeChild(locationInformation.firstChild);
+  }
+}
+
+export function showError() {
+  const inputError = document.querySelector("span.error");
+  console.log(inputError);
+  inputError.textContent = "City not found";
+  inputError.className = "error active";
+}
+
 export function displayWeatherInfo(location) {
   const locationInformation = document.querySelector(".location-information");
   const weatherContainer = componentWeatherContainer();
+  const inputError = document.querySelector("span.error");
+
+  // Clear error if it exists
+  inputError.className = "error";
+  inputError.textContent = "";
+
+  clearWeatherInfo();
 
   locationInformation.appendChild(
     componentLocationHeader(
