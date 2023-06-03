@@ -191,7 +191,7 @@ export function showError() {
   inputError.className = "error active";
 }
 
-export function displayWeatherInfo(location) {
+export function displayWeatherInfo(location, selectedMeasurement) {
   const locationInformation = document.querySelector(".location-information");
   const weatherContainer = componentWeatherContainer();
   const inputError = document.querySelector("span.error");
@@ -208,23 +208,43 @@ export function displayWeatherInfo(location) {
       format(new Date(location.localTime), "eeee, MMMM dd, yyyy  |  p")
     )
   );
-
   locationInformation.appendChild(weatherContainer);
-  weatherContainer.appendChild(
-    componentBasicTempDisplay(
-      location.conditionIcon,
-      `${location.temp}°F`,
-      location.condition,
-      `${location.feelsLike}°F`
-    )
-  );
-  weatherContainer.appendChild(
-    componentDetailedDisplay(
-      `${location.windMph} mph`,
-      `${location.humidity}%`,
-      `${location.rain}%`
-    )
-  );
+
+  if (selectedMeasurement === "fahrenheit") {
+    weatherContainer.appendChild(
+      componentBasicTempDisplay(
+        location.conditionIcon,
+        `${location.tempF}°F`,
+        location.condition,
+        `${location.feelsLikeF}°F`
+      )
+    );
+    weatherContainer.appendChild(
+      componentDetailedDisplay(
+        `${location.windMph} mph`,
+        `${location.humidity}%`,
+        `${location.rain}%`
+      )
+    );
+  }
+
+  if (selectedMeasurement === "celsius") {
+    weatherContainer.appendChild(
+      componentBasicTempDisplay(
+        location.conditionIcon,
+        `${location.tempC}°C`,
+        location.condition,
+        `${location.feelsLikeC}°C`
+      )
+    );
+    weatherContainer.appendChild(
+      componentDetailedDisplay(
+        `${location.windKph} kph`,
+        `${location.humidity}%`,
+        `${location.rain}%`
+      )
+    );
+  }
 }
 
 export function init() {
