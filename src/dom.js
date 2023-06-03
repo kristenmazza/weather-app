@@ -176,6 +176,26 @@ function componentDetailedDisplay(wind, humidity, rain) {
   return detailedConditionsContainer;
 }
 
+function componentLoading() {
+  const loading = document.createElement("div");
+  loading.setAttribute("id", "loading");
+
+  return loading;
+}
+
+export function displayLoading() {
+  const loader = document.querySelector("#loading");
+  loader.classList.add("display");
+  setTimeout(() => {
+    loader.classList.remove("display");
+  }, 5000);
+}
+
+export function hideLoading() {
+  const loader = document.querySelector("#loading");
+  loader.classList.remove("display");
+}
+
 export function clearWeatherInfo() {
   const locationInformation = document.querySelector(".location-information");
 
@@ -186,21 +206,22 @@ export function clearWeatherInfo() {
 
 export function showError() {
   const inputError = document.querySelector("span.error");
-  console.log(inputError);
   inputError.textContent = "City not found";
   inputError.className = "error active";
+}
+
+export function clearError() {
+  const inputError = document.querySelector("span.error");
+
+  inputError.className = "error";
+  inputError.textContent = "";
 }
 
 export function displayWeatherInfo(location, selectedMeasurement) {
   const locationInformation = document.querySelector(".location-information");
   const weatherContainer = componentWeatherContainer();
-  const inputError = document.querySelector("span.error");
 
-  // Clear error if it exists
-  inputError.className = "error";
-  inputError.textContent = "";
-
-  clearWeatherInfo();
+  clearError();
 
   locationInformation.appendChild(
     componentLocationHeader(
@@ -260,5 +281,6 @@ export function init() {
   header.appendChild(title);
   header.appendChild(searchForm);
   header.appendChild(conversionToggle);
+  container.appendChild(componentLoading());
   container.appendChild(locationInformation);
 }

@@ -1,6 +1,14 @@
 import "./style.css";
 import Location from "./location";
-import { init, displayWeatherInfo, showError, clearWeatherInfo } from "./dom";
+import {
+  init,
+  displayWeatherInfo,
+  showError,
+  clearWeatherInfo,
+  displayLoading,
+  hideLoading,
+  clearError,
+} from "./dom";
 
 let selectedMeasurement = "fahrenheit";
 let searchInput = "queensland";
@@ -8,6 +16,9 @@ let searchInput = "queensland";
 init();
 
 async function getWeatherData(name) {
+  clearError();
+  clearWeatherInfo();
+  displayLoading();
   try {
     const response = await fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=623e5f2a87014dff886202016231405&q=${name}&aqi=no`,
@@ -19,7 +30,8 @@ async function getWeatherData(name) {
     let locationName;
     if (
       weatherData.location.country === "United States of America" ||
-      weatherData.location.country === "USA United States of America"
+      weatherData.location.country === "USA United States of America" ||
+      weatherData.location.country === "USA"
     ) {
       locationName = `${weatherData.location.name}, ${weatherData.location.region}`;
     } else {
@@ -54,10 +66,12 @@ async function getWeatherData(name) {
     );
 
     displayWeatherInfo(location, selectedMeasurement);
+
+    hideLoading();
   } catch (err) {
-    console.log("try again");
     showError();
     clearWeatherInfo();
+    hideLoading();
   }
 }
 
