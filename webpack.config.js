@@ -8,11 +8,11 @@ module.exports = {
   },
   devtool: "inline-source-map",
   devServer: {
-    static: './dist',
+    static: "./dist",
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Development",
+      title: "WeatherApp",
     }),
   ],
   output: {
@@ -21,9 +21,9 @@ module.exports = {
     clean: true,
   },
   optimization: {
-    runtimeChunk: 'single',
+    runtimeChunk: "single",
   },
- 
+
   module: {
     rules: [
       {
