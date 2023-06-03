@@ -55,7 +55,7 @@ function componentConversionToggle() {
   toggleOnInput.checked = true;
   toggleOnLabel.setAttribute("for", "toggle-on");
   toggleOnLabel.classList.add("btn");
-  toggleOnLabel.textContent = "F";
+  toggleOnLabel.textContent = "°F";
 
   toggleOffInput.setAttribute("id", "toggle-off");
   toggleOffInput.classList.add("toggle", "toggle-right");
@@ -63,7 +63,7 @@ function componentConversionToggle() {
   toggleOffInput.setAttribute("value", "true");
   toggleOffInput.setAttribute("type", "radio");
   toggleOffLabel.setAttribute("for", "toggle-off");
-  toggleOffLabel.textContent = "C";
+  toggleOffLabel.textContent = "°C";
 
   toggleContainer.appendChild(toggleOnInput);
   toggleContainer.appendChild(toggleOnLabel);
