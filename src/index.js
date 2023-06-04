@@ -68,11 +68,10 @@ async function getWeatherData(name) {
     );
 
     displayWeatherInfo(location, selectedMeasurement);
-
-    hideLoading();
   } catch (err) {
     showError();
     clearWeatherInfo();
+  } finally {
     hideLoading();
   }
 }
