@@ -5,7 +5,7 @@
 
 Search cities worldwide to get current weather information. Switch between imperial and metric system.
 
-# Build Using
+# Built Using
 
 - JavaScript
 - CSS
